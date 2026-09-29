@@ -1,0 +1,23 @@
+\begin{table}
+\vspace{-1.1\baselineskip}
+\centering
+\caption{
+Error-reduction factors (pre-trained error divided by fine-tuned error) for seven models after CVaR-GPA fine-tuning on the four targets: the 2-dimensional Cauchy distribution, Neal's funnel, Fama--French 25, and streamflow. The only increase in error ($1$ out of $56$ cases) is shown in gray. The last row reports the geometric mean across the seven models for each target. The corresponding error values across the seven pre-trained models are reported in Appendix~\ref{App_FULLtable}.
+}
+\label{tab:headline:summary}
+\begin{tabular}{@{}l cc cc cc cc@{}}\toprule
+pre-trained & \multicolumn{2}{c}{Cauchy} & \multicolumn{2}{c}{Neal} & \multicolumn{2}{c}{Fama--French 25} & \multicolumn{2}{c}{Streamflow}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+model & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$ & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$ & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$ & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$\\
+\midrule
+Lip-KL-GPA & 6.6$\times$ & 67.3$\times$ & 4.5$\times$ & 4.6$\times$ & 4.2$\times$ & {36.1}$\times$ & {1.7}$\times$ & {11.6}$\times$\\
+TTF & 2.5$\times$ & \textcolor{gray}{0.9$\times$} & 13.6$\times$ & 16.0$\times$ & {32.7}$\times$ & {6.2}$\times$ & {4.9}$\times$ & 1.6$\times$\\
+Tail-GAN & 33.0$\times$ & 130.6$\times$ & 33.6$\times$ & 77.5$\times$ & {9.6}$\times$ & {20.1}$\times$ & {2.9}$\times$ & {4.6}$\times$\\
+t-EDM & 5.1$\times$ & 5.7$\times$ & 7.8$\times$ & 6.2$\times$ & 3.5$\times$ & {4.1}$\times$ & 2.2$\times$ & {3.0}$\times$\\
+SHD & 5.4$\times$ & 2.7$\times$ & 73.9$\times$ & 19.0$\times$ & {34.0}$\times$ & {20.7}$\times$ & {95.9}$\times$ & {13.5}$\times$\\
+DLPM & 35.0$\times$ & 1.6$\times$ & 267.4$\times$ & 10.5$\times$ & {468.2}$\times$ & {25.0}$\times$ & 667.7$\times$ & {10.6}$\times$\\
+mTAF & 4.8$\times$ & 5.2$\times$ & 24.8$\times$ & 20.7$\times$ & {11.9}$\times$ & {28.8}$\times$ & 2.0$\times$ & {3.9}$\times$\\
+\midrule
+\textbf{geom.\ mean} & \textbf{8.2}$\times$ & \textbf{7.2}$\times$ & \textbf{25.9}$\times$ & \textbf{14.7}$\times$ & \textbf{{18.9}}$\times$ & \textbf{{16.1}}$\times$ & \textbf{{9.5}}$\times$ & \textbf{{5.4}}$\times$\\
+\bottomrule\end{tabular}
+\end{table}

@@ -1,0 +1,73 @@
+# CVaR finetune config: Student-t nu=1.0, KL-DV, D(P||Q), L=0.125, lr_P=25
+---
+# Data
+N_samples_Q: 5000
+N_samples_P: 5000
+N_dim: 2
+dataset: CVaR_student_t_nu1.8
+random_seed: 0
+
+N_latent_dim: null
+sample_latent: False
+
+N_project_dim: null
+
+beta: null
+sigma_P: 1.0
+sigma_Q: null
+nu: 1.8
+interval_length: null
+label: null
+pts_P: null
+pts_Q: null
+pts_P_2: null
+pts_Q_2: null
+y0: null
+
+# (f, Gamma)-divergence
+f: KL
+alpha: null
+formulation: DV
+Gamma: Lipschitz
+L: 0.125
+reverse: False
+constraint: hard
+lamda: null
+phi_model: GPA_NN
+
+# Wasserstein-1 metric
+calc_Wasserstein1: False
+
+# Neural Network discriminator <phi>
+NN_model: fnn
+N_fnn_layers:
+    - 32
+    - 32
+    - 32
+N_cnn_layers: null
+activation_ftn:
+    - relu
+eps: 0.5
+N_conditions: 1
+
+# Discriminator training parameters
+epochs_phi: 3
+lr_phi: 0.005
+optimizer: adam
+
+# Particles transportation parameters
+epochs: 4000
+lr_P: 25
+ode_solver: forward_euler
+mobility: null
+lr_P_decay: null
+
+exp_no: finetune
+mb_size_P: 5000
+mb_size_Q: 5000
+
+# save/display
+save_iter: 50
+plot_result: True
+plot_intermediate_result: False
+...

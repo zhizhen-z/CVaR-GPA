@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+# run outputs
+assets/
+logs/
+slurm-*.out
+pretrain/pretrained/
+# third-party baseline code, cloned by setup_third_party.sh
+pretrain/third_party/

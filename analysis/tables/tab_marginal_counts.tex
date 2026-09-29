@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering\small\setlength{\tabcolsep}{3.5pt}
+\caption{Number of marginal distributions whose error decreases after fine-tuning with CVaR-GPA, out of the $d$ marginals of each dataset, for the seven pre-trained models.}
+\label{tab:marg_counts}
+\begin{tabular}{l rr rr rr rr}\toprule
+ & \multicolumn{2}{c}{2-d Cauchy ($d=2$)} & \multicolumn{2}{c}{Neal's funnel ($d=2$)} & \multicolumn{2}{c}{FF25 ($d=25$)} & \multicolumn{2}{c}{Streamflow ($d=64$)}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+pre-trained model & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$ & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$ & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$ & $\mathcal{E}_{L^1}$ & $\mathcal{E}_{\mathrm{tail}}$\\ \midrule
+Lip-KL-GPA & 2/2 & 2/2 & 2/2 & 1/2 & 25/25 & 25/25 & 58/64 & 64/64\\
+TTF & 2/2 & 1/2 & 2/2 & 2/2 & 25/25 & 25/25 & 64/64 & 45/64\\
+Tail-GAN & 2/2 & 2/2 & 2/2 & 2/2 & 25/25 & 25/25 & 64/64 & 57/64\\
+t-EDM & 2/2 & 2/2 & 2/2 & 2/2 & 25/25 & 25/25 & 64/64 & 61/64\\
+SHD & 1/2 & 1/2 & 2/2 & 2/2 & 25/25 & 25/25 & 64/64 & 64/64\\
+DLPM & 2/2 & 2/2 & 2/2 & 2/2 & 25/25 & 25/25 & 64/64 & 64/64\\
+mTAF & 2/2 & 2/2 & 2/2 & 2/2 & 25/25 & 25/25 & 61/64 & 63/64\\
+\bottomrule\end{tabular}
+\end{table}

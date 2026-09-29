@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering\small\setlength{\tabcolsep}{3pt}
+\caption{Neal's funnel: errors of the marginal distributions of $x_1$ and $x_2$ for the seven pre-trained models before and after fine-tuning, and the error-reduction factors (before $/$ after). The single non-improvement is in gray; improvements are in bold. The last row reports the geometric mean of the factors over the seven models. t-EDM with $\nu=(4,20)$.}
+\label{tab:neal_marg}
+\resizebox{\linewidth}{!}{\begin{tabular}{l rrr rrr rrr rrr}\toprule
+ & \multicolumn{6}{c}{$\mathcal{E}_{L^1}$} & \multicolumn{6}{c}{$\mathcal{E}_{\mathrm{tail}}$}\\ \cmidrule(lr){2-7}\cmidrule(lr){8-13}
+ & \multicolumn{3}{c}{$x_1$} & \multicolumn{3}{c}{$x_2$} & \multicolumn{3}{c}{$x_1$} & \multicolumn{3}{c}{$x_2$}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}\cmidrule(lr){11-13}
+pre-trained model & before & after & factor & before & after & factor & before & after & factor & before & after & factor\\ \midrule
+Lip-KL-GPA & 0.0164 & 0.0108 & \textbf{1.5}$\times$ & 0.108 & 0.0228 & \textbf{4.7}$\times$ & 0.0394 & 0.0403 & \textcolor{gray}{0.98$\times$} & 0.0773 & 0.0188 & \textbf{4.1}$\times$\\
+TTF & 0.106 & 0.037 & \textbf{2.9}$\times$ & 0.47 & 0.0269 & \textbf{17.5}$\times$ & 0.37 & 0.0763 & \textbf{4.8}$\times$ & 0.218 & 0.0133 & \textbf{16.4}$\times$\\
+Tail-GAN & 0.352 & 0.0143 & \textbf{24.6}$\times$ & 1.48 & 0.0228 & \textbf{64.9}$\times$ & 1.02 & 0.0375 & \textbf{27.2}$\times$ & 3.73 & 0.0315 & \textbf{118.4}$\times$\\
+t-EDM & 0.135 & 0.0131 & \textbf{10.3}$\times$ & 0.102 & 0.021 & \textbf{4.9}$\times$ & 0.447 & 0.0196 & \textbf{22.8}$\times$ & 0.0768 & 0.0125 & \textbf{6.1}$\times$\\
+SHD & 0.158 & 0.0112 & \textbf{14.1}$\times$ & 1.71 & 0.0251 & \textbf{68.1}$\times$ & 0.884 & 0.0317 & \textbf{27.9}$\times$ & 0.576 & 0.0195 & \textbf{29.5}$\times$\\
+DLPM & 5.69 & 0.0146 & \textbf{389.7}$\times$ & 5.23 & 0.0303 & \textbf{172.6}$\times$ & 0.203 & 0.0312 & \textbf{6.5}$\times$ & 0.232 & 0.0216 & \textbf{10.7}$\times$\\
+mTAF & 0.0565 & 0.0093 & \textbf{6.1}$\times$ & 0.513 & 0.0206 & \textbf{24.9}$\times$ & 0.223 & 0.0427 & \textbf{5.2}$\times$ & 0.421 & 0.0193 & \textbf{21.8}$\times$\\
+\midrule
+\textbf{geometric mean} & & & \textbf{12.1}$\times$ & & & \textbf{25.8}$\times$ & & & \textbf{8.3}$\times$ & & & \textbf{16.5$\times$}\\
+\bottomrule\end{tabular}}
+\end{table}

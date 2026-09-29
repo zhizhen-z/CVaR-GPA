@@ -1,0 +1,12 @@
+\begin{table}[htbp]
+\centering\small
+\caption{2-dimensional Cauchy target, Lip-KL-GPA pre-trained model: joint errors for three levels $\alpha$, with $k=(1-\alpha)M$ the number of  generated particles above the level. }
+\label{tab:alpha}
+\begin{tabular}{lcccc}\toprule
+ & \multicolumn{2}{c}{$\mathcal{E}_{L^1}$} & \multicolumn{2}{c}{$\mathcal{E}_{\mathrm{tail}}$}\\ \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+$\alpha$ & pre-trained & fine-tuned & pre-trained & fine-tuned\\ \midrule
+$0.85$ ($k=750$) & 7.13 & {6.11} & 4.24 & {0.298}\\
+$0.95$ ($k=250$) & 7.13 & {6.01} & 4.24 & {0.331}\\
+$0.9994$ ($k=3$) & 7.13 & {1.08} & 4.24 & {0.0628}\\
+\bottomrule\end{tabular}
+\end{table}

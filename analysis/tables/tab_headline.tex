@@ -1,0 +1,45 @@
+\begin{table}[t]
+\centering\small\setlength{\tabcolsep}{4.5pt}
+\caption{Seven pre-trained generative models before and after fine-tuning with CVaR-GPA, all with the same hyperparameters. Factor: pre-trained error divided by fine-tuned error. {For Fama--French 25 and streamflow, the pre-trained and fine-tuned errors are geometric means over the $d$ marginals, so that the factor equals the geometric mean of the per-marginal error-reduction factors (up to rounding of the displayed errors).} Bold: error-reduction factor above $1$ (improvement). The tail parameter of t-EDM is selected by the tail error of the pre-trained model over $\nu\in\{3,5,7\}$ ($\nu=3$ on the Cauchy and Fama--French targets, $\nu=5$ on the streamflow data); on Neal's funnel it uses the per-coordinate setting $\nu=(4,20)$ of its authors.}
+\label{tab:headline}
+\begin{tabular}{l rrr rrr}\toprule
+ & \multicolumn{3}{c}{$\mathcal{E}_{L^1}$} & \multicolumn{3}{c}{$\mathcal{E}_{\mathrm{tail}}$}\\ \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+pre-trained model & pre-trained & fine-tuned & factor & pre-trained & fine-tuned & factor\\
+\midrule
+\multicolumn{7}{l}{\textit{2-d Cauchy ($\nu=1$), joint $\|x\|$, $M{=}N{=}5000$}}\\[1pt]
+Lip-KL-GPA & 7.13 & 1.08 & \textbf{6.6}$\times$ & 4.24 & 0.063 & \textbf{67.3}$\times$\\
+TTF & 17.6 & 7.13 & \textbf{2.5}$\times$ & 0.138 & 0.149 & \textcolor{gray}{0.9$\times$}\\
+Tail-GAN & 50.5 & 1.53 & \textbf{33.0}$\times$ & 4.95 & 0.0379 & \textbf{130.6}$\times$\\
+t-EDM & 6.28 & 1.22 & \textbf{5.1}$\times$ & 0.294 & 0.0512 & \textbf{5.7}$\times$\\
+SHD & 278 & 51.2 & \textbf{5.4}$\times$ & 2.8 & 1.02 & \textbf{2.7}$\times$\\
+DLPM & 604 & 17.3 & \textbf{35.0}$\times$ & 0.659 & 0.419 & \textbf{1.6}$\times$\\
+mTAF & 67.6 & 14.0 & \textbf{4.8}$\times$ & 1.81 & 0.347 & \textbf{5.2}$\times$\\
+\midrule
+\multicolumn{7}{l}{\textit{2-d  Neal's funnel, joint $\|x\|$, $M{=}N{=}5000$}}\\[1pt]
+Lip-KL-GPA & 0.102 & 0.0229 & \textbf{4.5}$\times$ & 0.0763 & 0.0166 & \textbf{4.6}$\times$\\
+TTF & 0.524 & 0.0385 & \textbf{13.6}$\times$ & 0.276 & 0.0172 & \textbf{16.0}$\times$\\
+Tail-GAN & 0.839 & 0.025 & \textbf{33.6}$\times$ & 2.45 & 0.0316 & \textbf{77.5}$\times$\\
+t-EDM& 0.192 & 0.0246 & \textbf{7.8}$\times$ & 0.0872 & 0.0141 & \textbf{6.2}$\times$\\
+SHD & 1.74 & 0.0235 & \textbf{73.9}$\times$ & 0.596 & 0.0313 & \textbf{19.0}$\times$\\
+DLPM & 8.15 & 0.0305 & \textbf{267.4}$\times$ & 0.237 & 0.0226 & \textbf{10.5}$\times$\\
+mTAF & 0.565 & 0.0228 & \textbf{24.8}$\times$ & 0.429 & 0.0207 & \textbf{20.7}$\times$\\
+\midrule
+\multicolumn{7}{l}{\textit{Fama--French 25, per-portfolio {geometric} mean, $M{=}N{=}1182$}}\\[1pt]
+Lip-KL-GPA & {0.529} & {0.125} & \textbf{4.2}$\times$ & {3.89} & {0.108} & \textbf{{36.1}}$\times$\\
+TTF & {5.64} & {0.173} & \textbf{{32.7}}$\times$ & {0.848} & {0.138} & \textbf{{6.2}}$\times$\\
+Tail-GAN & {1.33} & {0.138} & \textbf{{9.6}}$\times$ & {2.21} & {0.11} & \textbf{{20.1}}$\times$\\
+t-EDM & {0.426} & {0.123} & \textbf{3.5}$\times$ & {0.427} & {0.103} & \textbf{{4.1}}$\times$\\
+SHD & {5.16} & {0.152} & \textbf{{34.0}}$\times$ & {2.34} & {0.113} & \textbf{{20.7}}$\times$\\
+DLPM & {58.4} & {0.125} & \textbf{{468.2}}$\times$ & 2.92 & {0.116} & \textbf{{25.0}}$\times$\\
+mTAF & {1.69} & {0.142} & \textbf{{11.9}}$\times$ & {2.77} & {0.0963} & \textbf{{28.8}}$\times$\\
+\midrule
+\multicolumn{7}{l}{\textit{Streamflow (64 gauges), per-gauge {geometric} mean, $M{=}N{=}7305$}}\\[1pt]
+Lip-KL-GPA & {0.21} & {0.121} & \textbf{{1.7}}$\times$ & {1.74} & {0.151} & \textbf{{11.6}}$\times$\\
+TTF & {0.585} & {0.118} & \textbf{{4.9}}$\times$ & {0.226} & {0.146} & \textbf{1.6}$\times$\\
+Tail-GAN & {0.694} & {0.238} & \textbf{{2.9}}$\times$ & {0.921} & {0.202} & \textbf{{4.6}}$\times$\\
+t-EDM & {0.187} & {0.0848} & \textbf{2.2}$\times$ & {0.267} & {0.0886} & \textbf{{3.0}}$\times$\\
+SHD & {18.4} & {0.192} & \textbf{{95.9}}$\times$ & {2.63} & {0.195} & \textbf{{13.5}}$\times$\\
+DLPM & {277} & {0.414} & \textbf{667.7}$\times$ & 3.94 & {0.371} & \textbf{{10.6}}$\times$\\
+mTAF & {0.209} & {0.107} & \textbf{2.0}$\times$ & {0.704} & {0.179} & \textbf{{3.9}}$\times$\\
+\bottomrule\end{tabular}
+\end{table}

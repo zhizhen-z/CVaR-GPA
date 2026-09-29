@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering\small\setlength{\tabcolsep}{3pt}
+\caption{2-dimensional Cauchy target: errors of the marginal distributions of $x_1$ and $x_2$ for the seven pre-trained models before and after fine-tuning, and the error-reduction factors (before $/$ after). Non-improvements are in gray; improvements are in bold. The last row reports the geometric mean of the factors over the seven models. t-EDM with $\nu=3$.}
+\label{tab:2d_marg}
+\resizebox{\linewidth}{!}{\begin{tabular}{l rrr rrr rrr rrr}\toprule
+ & \multicolumn{6}{c}{$\mathcal{E}_{L^1}$} & \multicolumn{6}{c}{$\mathcal{E}_{\mathrm{tail}}$}\\ \cmidrule(lr){2-7}\cmidrule(lr){8-13}
+ & \multicolumn{3}{c}{$x_1$} & \multicolumn{3}{c}{$x_2$} & \multicolumn{3}{c}{$x_1$} & \multicolumn{3}{c}{$x_2$}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}\cmidrule(lr){11-13}
+pre-trained model & before & after & factor & before & after & factor & before & after & factor & before & after & factor\\ \midrule
+Lip-KL-GPA & 3.91 & 0.873 & \textbf{4.5}$\times$ & 5.11 & 0.858 & \textbf{6.0}$\times$ & 3.37 & 0.0578 & \textbf{58.3}$\times$ & 3.34 & 0.0788 & \textbf{42.4}$\times$\\
+TTF & 6.66 & 1.98 & \textbf{3.4}$\times$ & 11.4 & 5.94 & \textbf{1.9}$\times$ & 0.159 & 0.0786 & \textbf{2.0}$\times$ & 0.114 & 0.142 & \textcolor{gray}{0.8$\times$}\\
+Tail-GAN & 25.0 & 1.33 & \textbf{18.8}$\times$ & 37.7 & 1.49 & \textbf{25.3}$\times$ & 4.63 & 0.129 & \textbf{35.9}$\times$ & 4.17 & 0.055 & \textbf{75.8}$\times$\\
+t-EDM & 3.34 & 1.29 & \textbf{2.6}$\times$ & 4.12 & 0.822 & \textbf{5.0}$\times$ & 0.19 & 0.0502 & \textbf{3.8}$\times$ & 0.24 & 0.049 & \textbf{4.9}$\times$\\
+SHD & 11.5 & 21.4 & \textcolor{gray}{0.5$\times$} & 275 & 45.5 & \textbf{6.0}$\times$ & 0.889 & 1 & \textcolor{gray}{0.9$\times$} & 2.89 & 0.987 & \textbf{2.9}$\times$\\
+DLPM & 482 & 10.2 & \textbf{47.3}$\times$ & 273 & 12.0 & \textbf{22.8}$\times$ & 0.644 & 0.42 & \textbf{1.5}$\times$ & 0.679 & 0.286 & \textbf{2.4}$\times$\\
+mTAF & 32.5 & 7.92 & \textbf{4.1}$\times$ & 54.4 & 10.0 & \textbf{5.4}$\times$ & 1.73 & 0.29 & \textbf{6.0}$\times$ & 1.79 & 0.355 & \textbf{5.0}$\times$\\
+\midrule
+\textbf{geometric mean} & & & \textbf{5.0}$\times$ & & & {\textbf{7.3}$\times$} & & & {\textbf{5.4}$\times$} & & & {\textbf{6.4}$\times$}\\
+\bottomrule\end{tabular}}
+\end{table}
