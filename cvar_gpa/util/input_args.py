@@ -312,6 +312,10 @@ def input_params():
     parser.add_argument('--stop_median_window', type=int, default=1000,
                         help='Window W (iterations) for the two median stop conditions.')
 
+    parser.add_argument('--target_file', type=str, default=None,
+                        help='Target samples for --dataset CVaR_custom or Learning_custom: '
+                             'a .npy array of shape (N, d). A relative path is relative to cvar_gpa/.')
+
     # Progressive / warm-start training
     parser.add_argument('--init_P_file', type=str, default=None,
                         help='Path to a .pickle result file; use its final trajectory as initial P')

@@ -206,6 +206,20 @@ def generate_data(param):
         Y_ = Y_gaussian
 
 
+    elif 'custom' in param['dataset']:
+        # Target samples of the user: --target_file, a .npy array of shape (N, d). All rows are used.
+        # Initial sample: Gaussian with the mean and standard deviation of every coordinate of the target.
+        if not param.get('target_file'):
+            raise ValueError("--dataset %s needs --target_file <.npy array of shape (N, d)>" % param['dataset'])
+        X_ = np.asarray(np.load(param['target_file']), dtype=np.float32)
+        if X_.ndim != 2:
+            raise ValueError("--target_file must hold an array of shape (N, d), got %s" % (X_.shape,))
+        param['N_dim'] = X_.shape[1]
+        param['N_samples_Q'] = X_.shape[0]
+        rng = np.random.default_rng(param['random_seed'])
+        Y_ = (rng.standard_normal((param['N_samples_P'], X_.shape[1])).astype(np.float32)
+              * X_.std(axis=0)[None, :] + X_.mean(axis=0)[None, :]).astype(np.float32)
+
     elif param['dataset'] in ('Neal_funnel', 'Learning_Neal_funnel', 'CVaR_Neal_funnel'):
         # Neal's funnel (Neal 2003):  v ~ N(0,9),  x | v ~ N(0, exp(v/2))
         rng = np.random.default_rng(param['random_seed'])
