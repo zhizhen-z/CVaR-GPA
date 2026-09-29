@@ -214,6 +214,50 @@ On a given machine both drivers are deterministic. Across CPU models the float32
 - The launcher used to pre-train the six external models on the Fama-French target was not kept. `launch/pretrain/real.sbatch` applies the streamflow commands (the real-data protocols, with tags `TTFstd`, `SHDstock`, `mTAFreal` and `TailGANpar`) to that target.
 - The third-party baseline repositories. `setup_third_party.sh` clones them at the commits used for the paper; each has its own license.
 
+## File formats
+
+All samples are stored as Python pickle files with the same layout, a list of two dictionaries:
+
+```python
+param, result = pickle.load(open(file, "rb"))
+```
+
+**Pre-trained samples** (`pretrain/pretrained/<target>/<model>/KL=02.00-<tag>_<N>_<M>_00_<target>.pickle`, written by the seven wrappers, read by `--init_P_file`)
+
+| Entry | Content |
+|---|---|
+| `result['trajectories'][-1]` | the samples of the pre-trained model: array of shape `(M, d)`, `float32`, in the units of the data (not standardized) |
+| `param['X_']` | the target sample the model was trained on: array of shape `(N, d)` |
+| `param['Y_']` | the same samples as `result['trajectories'][-1]` |
+| `param['dataset']`, `param['N_samples_Q']`, `param['N_samples_P']`, `param['random_seed']` | target name, `N`, `M` and seed |
+| other entries | empty or `None`; they are there so that the file has the fields of a driver output |
+
+The drivers read only `result['trajectories'][-1]`. If it has more than `--N_samples_P` rows, the first `--N_samples_P` are used. Samples of any other model can therefore be fine-tuned after storing them in this layout:
+
+```python
+import pickle
+import numpy as np
+
+samples = np.load("my_samples.npy")          # shape (M, d), in the units of the target
+with open("my_model.pickle", "wb") as fh:
+    pickle.dump([{}, {"trajectories": [samples.astype(np.float32)]}], fh)
+```
+
+and passing `--init_P_file my_model.pickle` to either driver. The target is chosen with `--dataset`; the targets are defined in `cvar_gpa/util/generate_data.py`.
+
+**Outputs of the two drivers** (`assets/<dataset>/<name>.pickle`; the name contains `L`, the tail index for the Student-t targets, `N`, `M`, the seed and `--exp_no`)
+
+| Entry | Content |
+|---|---|
+| `result['trajectories']` | list of snapshots of the particles, one every `--save_iter` iterations, each of shape `(M, d)`; the last one is the fine-tuned sample |
+| `param['X_']` | the target sample, shape `(N, d)` |
+| `param['Y_']` | the default initial sample of the dataset (not the pre-trained sample; that one is in the file named by `param['init_P_file']`) |
+| `param` | all settings of the run: the config file with the command-line arguments applied |
+| `result['KE_Ps']`, `result['divergences']`, `result['cvar_signed_diff_history']` | per iteration: kinetic energy, value of the Lipschitz-regularized KL objective, and CVaR of the particles minus CVaR of the target |
+| `result['vectorfields']`, `result['kl_vf_snapshots']`, `result['cvar_vf_snapshots']` | per snapshot: the velocity of every particle, and its two components |
+
+Pickle files can execute code when loaded; load only files that you trust.
+
 ## Third-party code
 
 | Baseline | Repository | Commit |
