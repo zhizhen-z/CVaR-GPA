@@ -9,8 +9,6 @@ Wrapper: `pretrain/wrappers/LipKL/run_lipkl.py`. It runs the hard driver of this
 | Divergence | KL with Lipschitz constant L = 1, Donsker-Varadhan form |
 | Step size, iterations | 0.5, 4000; forward Euler |
 | Particles, target samples | M = N: 5000 (synthetic), 1182 (Fama-French), 7305 (streamflow); full batch |
-| Critic | 3 hidden layers, ReLU, spectral normalization; width 32 for the 2-d targets, 64 for Fama-French and streamflow |
-| Critic optimizer | Adam, learning rate 0.005, 3 steps per iteration, warm-started |
 | Seed | 0 |
 | Config | `cvar_gpa/configs/Learning_<target>-GPA_NN.yaml` |
 

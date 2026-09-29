@@ -4,9 +4,45 @@ Code for the paper "Fine-Tuning Generative Models for Extreme Events via CVaR-Pe
 
 ![Fine-tuning a pre-trained model on a 2-d Cauchy target](docs/cauchy_finetuning.gif)
 
-*Fine-tuning a pre-trained model (Lip-KL-GPA) on a 2-d Cauchy target with 5000 particles. Left: the particles, colored by their radius. Right: the fraction of samples beyond a given radius. The pre-trained model has no sample beyond radius 116; after fine-tuning the tail follows the target up to radius 7000.*
+*Fine-tuning a pre-trained model (Lip-KL-GPA) on a 2-d Cauchy target with 5000 particles. Left: the particles, colored by their radius. Right: the complementary CDF (CCDF) of the radius `||x||`. The largest radius is 116 in the pre-trained sample, 7263 in the target sample and 7354 after fine-tuning.*
 
 CVaR-GPA is a particle algorithm that fine-tunes the samples of a pre-trained generative model towards a heavy-tailed target. Each particle follows the gradient of a Lipschitz-regularized KL critic plus a term that closes the gap in the Conditional Value-at-Risk (CVaR) of the radius `||x||`.
+
+## Installation
+
+```bash
+git clone https://github.com/zhizhen-z/CVaR-GPA.git
+cd CVaR-GPA
+pip install -r requirements.txt        # Python 3.10
+```
+
+This covers the two drivers, `analysis/` and `examples/`. The six external pre-trained models need a second environment, described under Setup.
+
+## Quick start
+
+```bash
+python examples/quickstart.py
+```
+
+The script pre-trains a model on the 2-d Cauchy target with Lip-KL-GPA (4000 iterations), fine-tunes it with CVaR-GPA (2000 iterations, with the settings of the paper), prints both error metrics and writes an animation like the one above to `assets/quickstart/`. It runs on a CPU and took 6.5 minutes on 4 threads. Its output on our machine:
+
+```
+2-d Cauchy target, 5000 samples, 2000 fine-tuning iterations
+                         pre-trained    fine-tuned
+global L1 error               7.1225        2.8012
+tail error                    4.3074        0.2352
+largest radius                   109          5688     (target: 7263)
+```
+
+`python examples/quickstart.py --iterations 20000` runs the fine-tuning as long as in the paper. The numbers depend on the CPU in the last digits (see Determinism).
+
+`examples/animation.py` makes the same animation from any fine-tuning run on a 2-d target:
+
+```bash
+python examples/animation.py <fine-tuned run .pickle> <pre-trained model .pickle> <output .gif>
+```
+
+## Implementations
 
 The repository contains two implementations of the algorithm.
 
@@ -103,8 +139,8 @@ The two drivers interpret `--lam` differently.
 
 | Driver | `--lam` | CVaR velocity |
 |---|---|---|
-| `cvar_gpa_smooth.py` | `lambda / (1 - alpha)` | `2 * lam * Delta_k * w_i * Y_i/||Y_i||` |
-| `cvar_gpa_hard.py` | `1 / lambda` | `(1/lam) * 2 * Delta_k / (1 - alpha) * 1{||Y_i|| > y_k} * Y_i/||Y_i||` |
+| `cvar_gpa_smooth.py` | `lambda / (1 - alpha)` | `2 * lam * Delta_k * w_i * Y_i/\|\|Y_i\|\|` |
+| `cvar_gpa_hard.py` | `1 / lambda` | `(1/lam) * 2 * Delta_k / (1 - alpha) * 1{\|\|Y_i\|\| > y_k} * Y_i/\|\|Y_i\|\|` |
 
 `--lam 4e-3` in the smooth implementation and `--lam 250000 --beta_level 0.999` in the hard one give the same coefficient, `lambda / (1 - alpha) = 4e-3`.
 
@@ -124,13 +160,11 @@ The same values are used for every dataset and every pre-trained model. They are
 
 Stopping rule. A run stops when two medians over the last 1000 iterations both fall below 1e-10: the kinetic energy `K_k = (1/2M) sum ||v_i||^2`, and the kinetic energy of the critic velocity on the 3 particles with the largest radius. Otherwise it stops after 20000 iterations.
 
-Critic. A fully connected network with 3 hidden layers, leaky-ReLU activations with slope 0.01 and spectral normalization. The width is 32 for the 2-d Student-t and Neal's funnel targets, 64 for Fama-French and 256 for streamflow. The critic is warm-started and updated with 3 Adam steps per iteration (5 for streamflow) at learning rate 0.005.
-
 Configs. Each target has two configs in `cvar_gpa/configs/`: `Learning_<target>` for Lip-KL-GPA pre-training (`L = 1`, step size 0.5) and `CVaR_<target>` for fine-tuning (`L = 0.125`, step size 25), where `<target>` is `student_t_nu<NU>`, `Neal_funnel`, `FF25_monthly` or `Streamflow_ohio`. The launchers pass the same values on the command line.
 
 ## Reproducing the experiments
 
-1. Pre-train the seven models on each target with the launchers in `launch/pretrain/`. The six external models use the settings published by their authors.
+1. Pre-train the seven models on each target with the launchers in `launch/pretrain/`. The settings of each model are listed in `pretrain/settings/`.
    - Lip-KL-GPA: `lipkl.sbatch` with `DS=student_t_2D`, `DS=student_t_2D_nu1.2` (or 1.5, 1.8), `DS=Neal_funnel` or `DS=FF25_monthly N=1182`, and `lipkl_streamflow.sbatch` for streamflow.
    - Synthetic targets: `synthetic.sbatch` with `DS=student_t_2D` (the 2-d Cauchy target), `DS=student_t_2D_nu1.2`, `DS=student_t_2D_nu1.5`, `DS=student_t_2D_nu1.8` or `DS=Neal_funnel`.
    - Real targets: `real.sbatch` with `DS=Streamflow_ohio N=7305` or `DS=FF25_monthly N=1182`.

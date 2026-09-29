@@ -12,7 +12,7 @@ BASELINE_PY() {        # python of the baseline environment (environment/baselin
   "${TAILNFLOWS_ENV:?set TAILNFLOWS_ENV to the prefix of the baseline conda environment}/bin/python" -u "$@"; }
 
 # Smooth version (Algorithms 1 and 2): the settings of every reported experiment.
-#   --lam = lambda/(1-alpha) = 4e-3, h = 0.5, L = 0.125, step size 25, at most 20000 iterations, leaky-ReLU(0.01) critic, seed 0;
+#   --lam = lambda/(1-alpha) = 4e-3, h = 0.5, L = 0.125, step size 25, at most 20000 iterations, seed 0;
 #   stop when the two medians over the last 1000 iterations fall below 1e-10.
 SMOOTH=(--f KL --formulation DV -L 0.125 --lr_P 25 --epochs 20000 --save_iter 200
         --lam 4e-3 --lam_rule fixed --activation_ftn leaky_relu_001 --cvar_gate ramp --ramp_h 0.5

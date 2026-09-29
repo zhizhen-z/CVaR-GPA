@@ -7,7 +7,7 @@ citations are equation and algorithm numbers of arXiv:2410.14171v2.
 
 | | |
 |---|---|
-| Training (Alg. 1) | sigma ~ LogNormal(-1.2, 1.2); noise n = sigma eps / sqrt(kappa), kappa ~ chi2(nu)/nu, one scalar kappa per sample; EDM preconditioning evaluated at sigma sqrt(nu/(nu-2)) (Eqs. 92, 100, 101); loss = ||D(x0 + n) - x0||^2 / c_out^2 (Eq. 12) |
+| Training (Alg. 1) | sigma ~ LogNormal(-1.2, 1.2); noise n = sigma eps / sqrt(kappa), kappa ~ chi2(nu)/nu, one scalar kappa per sample; EDM preconditioning evaluated at sigma sqrt(nu/(nu-2)) (Eqs. 92, 100, 101); loss = \|\|D(x0 + n) - x0\|\|^2 / c_out^2 (Eq. 12) |
 | Sampler (Alg. 2) | deterministic Heun, Karras grid with rho = 7, 18 steps, sigma from 80 to 0.002; start x ~ t(0, 80^2 I, nu) |
 | Other | sigma_data = 1, data z-scored and de-standardized on output, last checkpoint |
 | Tail parameter | nu in {3, 5, 7}, their unconditional grid; the reported row is the nu with the smallest tail error of the pre-trained model. On Neal's funnel: their per-coordinate setting nu = (4, 20) (`--nu 4,20`) |
