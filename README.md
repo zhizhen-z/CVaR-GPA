@@ -34,7 +34,7 @@ tail error                    4.3074        0.2352
 largest radius                   109          5688     (target: 7263)
 ```
 
-`python examples/quickstart.py --iterations 20000` runs the fine-tuning as long as in the paper. The numbers depend on the CPU in the last digits (see Determinism).
+`python examples/quickstart.py --iterations 20000` runs the fine-tuning as long as in the paper. The numbers change with the CPU model (see Determinism).
 
 `examples/animation.py` makes the same animation from any fine-tuning run on a 2-d target:
 
@@ -86,7 +86,10 @@ launch/                       SLURM launchers
     hard/                     fine-tuning with the hard implementation
 analysis/                     scoring and figure scripts, plus the outputs of our runs:
                               metrics/ (CSV files), tables/ (LaTeX tables of the paper), figures/
-environment/                  pinned package lists
+environment/                  pinned package lists of the two environments
+requirements.txt              the packages that CVaR-GPA itself needs
+examples/                     quickstart.py and animation.py
+docs/                         the animation at the top of this page
 setup_third_party.sh          clones the baseline repositories at the commits used for the paper
 ```
 
