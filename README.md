@@ -68,6 +68,12 @@ python cvar_gpa_smooth.py --dataset CVaR_custom \
 
 The paper uses `M = N` and `alpha = 1 - 3/N`. The fine-tuned samples are `result["trajectories"][-1]` in the output file `assets/CVaR_custom/KL-Lipschitz_0.1250_ramp_<N>_<M>_00_my_run.pickle`. [docs/usage.md](docs/usage.md) explains the arguments, the file formats and how to pre-train a model on your target.
 
+## Results on seven pre-trained models
+
+![Errors of seven pre-trained models on the streamflow target before and after fine-tuning](docs/streamflow_errors.png)
+
+*Daily streamflow at 64 gauges: global L1 error and tail error of seven pre-trained models before (circles) and after (squares) fine-tuning with CVaR-GPA, as geometric means over the 64 marginals. The same hyperparameters are used for all seven models.*
+
 ## Reproducing the paper
 
 The repository holds the launchers of every experiment of the paper, the wrappers of the seven pre-trained models, the two real datasets, and the metrics, tables and figures of our runs (`analysis/`). [docs/reproduce.md](docs/reproduce.md) describes them.
