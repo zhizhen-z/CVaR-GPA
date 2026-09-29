@@ -2,6 +2,10 @@
 
 Code for the paper "Fine-Tuning Generative Models for Extreme Events via CVaR-Penalized Wasserstein Gradient Flows" by Thejani Gamage, Hyemin Gu, Zhizhen Zhang, Ziyu Chen, Markos A. Katsoulakis and Luc Rey-Bellet.
 
+![Fine-tuning a pre-trained model on a 2-d Cauchy target](docs/cauchy_finetuning.gif)
+
+*Fine-tuning a pre-trained model (Lip-KL-GPA) on a 2-d Cauchy target with 5000 particles. Left: the particles, colored by their radius. Right: the fraction of samples beyond a given radius. The pre-trained model has no sample beyond radius 116; after fine-tuning the tail follows the target up to radius 7000.*
+
 CVaR-GPA is a particle algorithm that fine-tunes the samples of a pre-trained generative model towards a heavy-tailed target. Each particle follows the gradient of a Lipschitz-regularized KL critic plus a term that closes the gap in the Conditional Value-at-Risk (CVaR) of the radius `||x||`.
 
 The repository contains two implementations of the algorithm.
