@@ -72,6 +72,10 @@ The paper uses `M = N` and `alpha = 1 - 3/N`. The fine-tuned samples are `result
 
 The repository holds the launchers of every experiment of the paper, the wrappers of the seven pre-trained models, the two real datasets, and the metrics, tables and figures of our runs (`analysis/`). [docs/reproduce.md](docs/reproduce.md) describes them.
 
+## Contact
+
+For any questions regarding the implementation, please contact zhizhenzhang@umass.edu.
+
 ## Citation
 
 ```bibtex
