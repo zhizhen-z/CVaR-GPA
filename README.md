@@ -1,6 +1,6 @@
 # CVaR-GPA
 
-Code for the paper "Fine-Tuning Generative Models for Extreme Events via CVaR-Penalized Wasserstein Gradient Flows" by Thejani Gamage, Hyemin Gu, Zhizhen Zhang, Ziyu Chen, Markos A. Katsoulakis and Luc Rey-Bellet.
+Code for the paper "Fine-Tuning Generative Models for Extreme Events via CVaR-Penalized Wasserstein Gradient Flows" ([arXiv:2608.11544](https://arxiv.org/abs/2608.11544)) by Thejani Gamage, Hyemin Gu, Zhizhen Zhang, Ziyu Chen, Markos A. Katsoulakis and Luc Rey-Bellet.
 
 ![Fine-tuning a pre-trained model on a 2-d Cauchy target](docs/cauchy_finetuning.gif)
 
@@ -269,6 +269,20 @@ Pickle files can execute code when loaded; load only files that you trust.
 | DLPM | github.com/darioShar/DLPM | faecd3a |
 | t-EDM | our implementation in `pretrain/wrappers/tEDM/run_tedm.py`, following the authors' paper | |
 | Lip-KL-GPA | github.com/HyeminGu/Proximal_generative_models (written by Hyemin Gu), not cloned; `cvar_gpa/lib/` and `cvar_gpa/util/` build on it | |
+
+## Citation
+
+```bibtex
+@misc{gamage2026finetuninggenerativemodelsextreme,
+      title={Fine-Tuning Generative Models for Extreme Events via CVaR-Penalized Wasserstein Gradient Flows},
+      author={Thejani Gamage and Hyemin Gu and Zhizhen Zhang and Ziyu Chen and Markos Katsoulakis and Luc Rey-Bellet},
+      year={2026},
+      eprint={2608.11544},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML},
+      url={https://arxiv.org/abs/2608.11544},
+}
+```
 
 ## License
 
