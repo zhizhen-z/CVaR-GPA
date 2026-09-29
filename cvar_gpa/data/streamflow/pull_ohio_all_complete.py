@@ -1,4 +1,4 @@
-"""Pull EVERY HUC-05 daily-discharge gauge with a gap-free 2005-01-01..2024-12-31 record.
+"""Pull EVERY HUC-05 daily-discharge gauge with a complete daily record over 2005-01-01..2024-12-31.
 
 All catalog-span gauges are pulled (helpers in usgs_nwis.py) and every one with all 7305 days present is kept.
 Output: ohio_all_complete_dv_2005_2024.npz with keys discharge (7305, d) float32 raw ft^3/s, time_days, site_id,

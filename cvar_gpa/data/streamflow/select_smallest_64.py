@@ -1,5 +1,5 @@
 """Build the streamflow dataset of the paper: the 64 gauges with the smallest drainage area among the
-gap-free gauges of ohio_all_complete_dv_2005_2024.npz (sort by drain_area_km2, take the first 64).
+gauges with a complete daily record in ohio_all_complete_dv_2005_2024.npz (sort by drain_area_km2, take the first 64).
 Output: ohio_smallest64_dv_2005_2024.npz, same keys."""
 import os, numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
